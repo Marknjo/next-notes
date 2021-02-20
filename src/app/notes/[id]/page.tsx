@@ -1,4 +1,6 @@
 import { INote } from '@/src/types/INote';
+import styles from '../Notes.module.css';
+import Link from 'next/link';
 
 async function getNote(noteId: string) {
   const res = await fetch(
@@ -17,8 +19,15 @@ export default async function NotePage({ params }: { params: { id: string } }) {
   const note = await getNote(params.id);
 
   return (
-    <div>
-      <h1>Notes</h1>
+    <div className={styles.container}>
+      <h1>
+        <Link href='/notes'> &larr; Back</Link> Note{' '}
+      </h1>
+      <article className={styles.note}>
+        <h3 className={styles.title}>{note.title}</h3>
+        <h5 className={styles.content}>{note.content}</h5>
+        <p className={styles.created}>{note.createdAt}</p>
+      </article>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import PocketBase from 'pocketbase';
 import styles from './Notes.module.css';
 
 export const dynamic = 'auto',
-  revalidate = 60;
+  revalidate = 0;
 
 async function getNotes() {
   // const res = await fetch(
