@@ -1,6 +1,14 @@
-import Image from 'next/image';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 export default function Home() {
-  return <h1>Notes app</h1>;
+  return (
+    <div className={styles.container}>
+      <div className={styles.icon}>📒</div>
+      <h1>Notes app</h1>
+      <Link href='/notes' className={styles.action}>
+        View all Notes
+      </Link>
+    </div>
+  );
 }
