@@ -2,6 +2,7 @@ import { INote } from '@/src/types/INote';
 import Link from 'next/link';
 import PocketBase from 'pocketbase';
 import styles from './Notes.module.css';
+import AddNote from './AddNote';
 
 export const dynamic = 'auto',
   revalidate = 0;
@@ -44,6 +45,8 @@ export default async function NotesPage() {
           </Link>
         </p>
       )}
+
+      <AddNote />
     </div>
   );
 }
