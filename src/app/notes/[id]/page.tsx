@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 async function getNote(noteId: string) {
   const res = await fetch(
-    `http://127.0.0.1:8090/api/collection/notes/record/${noteId}`,
+    `http://127.0.0.1:8090/api/collections/note/records/${noteId}`,
     {
       next: { revalidate: 10 },
     }
