@@ -68,13 +68,13 @@ export default async function NotesPage() {
   );
 }
 
-function Note({ content, title, id, createdAt }: INote) {
+function Note({ content, title, id, created }: INote) {
   return (
     <Link href={`/notes/${id}`}>
       <article className={styles.note}>
         <h2 className={styles.title}>{title}</h2>
         <h5 className={styles.content}>{content}</h5>
-        <p className={styles.created}>{createdAt}</p>
+        <p className={styles.created}>{created}</p>
       </article>
     </Link>
   );

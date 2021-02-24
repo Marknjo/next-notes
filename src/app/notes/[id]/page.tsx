@@ -26,7 +26,7 @@ export default async function NotePage({ params }: { params: { id: string } }) {
       <article className={styles.note}>
         <h3 className={styles.title}>{note.title}</h3>
         <h5 className={styles.content}>{note.content}</h5>
-        <p className={styles.created}>{note.createdAt}</p>
+        <p className={styles.created}>{note.created}</p>
       </article>
     </div>
   );
