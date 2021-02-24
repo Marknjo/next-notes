@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import styles from './AddNote.module.css';
+import { experimental_useFormStatus as useFormStatus } from 'react-dom';
 
 interface IOnAddNoteProps {
   onAddNote: (
@@ -12,6 +13,7 @@ interface IOnAddNoteProps {
 
 export default function AddNote({ onAddNote }: IOnAddNoteProps) {
   const [message, setMessage] = useState('');
+  const { pending } = useFormStatus();
 
   async function onCreate(formData: FormData) {
     const res = await onAddNote(formData);
@@ -21,7 +23,7 @@ export default function AddNote({ onAddNote }: IOnAddNoteProps) {
   return (
     <>
       <div className={styles.divider} />
-      <form action={onCreate} method='post' className={styles.form}>
+      <form action={onCreate} className={styles.form}>
         <h3>Create a new Note</h3>
 
         <div className={styles['form-control']}>
@@ -56,8 +58,8 @@ export default function AddNote({ onAddNote }: IOnAddNoteProps) {
           </div>
         )}
 
-        <button className={styles.btn} type='submit'>
-          Add Note
+        <button className={styles.btn} type='submit' disabled={pending}>
+          {pending ? 'Adding...' : 'Add Note'}
         </button>
       </form>
     </>

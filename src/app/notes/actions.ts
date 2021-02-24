@@ -19,6 +19,8 @@ export async function addNote(formData: FormData) {
     const db = new PocketBase('http://127.0.0.1:8090');
     await db.collection('note').create(data);
 
+    await new Promise((res) => setTimeout(() => res(null), 2000));
+
     return {
       message: 'Successfully added the note',
     };
