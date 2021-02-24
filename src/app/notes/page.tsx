@@ -3,29 +3,46 @@ import Link from 'next/link';
 import PocketBase from 'pocketbase';
 import styles from './Notes.module.css';
 import AddNote from './AddNote';
-
-export const dynamic = 'auto',
-  revalidate = 0;
+import { addNote } from './actions';
+import { revalidatePath } from 'next/cache';
 
 async function getNotes() {
-  // const res = await fetch(
-  //   'http://127.0.0.1:8090/api/collections/note/records?page=1&perPage=30'
-  // );
-  const db = new PocketBase('http://127.0.0.1:8090');
-  const results = db.collection('note').getList(1, 10);
+  const res = await fetch(
+    'http://127.0.0.1:8090/api/collections/note/records?page=1&perPage=30',
+    {
+      cache: 'default',
+      next: {
+        revalidate: 3600,
+        tags: ['notes'],
+      },
+    }
+  );
+  // const db = new PocketBase('http://127.0.0.1:8090');
+  // const results = db.collection('note').getList(1, 10);
 
-  // const data = await res.json();
+  const data = await res.json();
 
-  const data = (await results).items;
+  // const data = (await results).items;
 
-  // return data?.items as Array<INote>;
-  return data as unknown as Array<INote> | [];
+  return data?.items as Array<INote>;
+  // return data as unknown as Array<INote> | [];
 }
 
 export default async function NotesPage() {
   const notes = await getNotes();
 
   const hasNotes = notes.length > 0;
+
+  async function onCreateNote(
+    formData: FormData
+    // setMessage: (message: string) => void
+  ) {
+    'use server';
+    const res = await addNote(formData);
+    // setMessage(res.message);
+    revalidatePath('/notes');
+    return res;
+  }
 
   return (
     <div className={styles.container}>
@@ -46,7 +63,7 @@ export default async function NotesPage() {
         </p>
       )}
 
-      <AddNote />
+      <AddNote onAddNote={onCreateNote} />
     </div>
   );
 }
