@@ -20,8 +20,12 @@ export default async function NotePage({ params }: { params: { id: string } }) {
 
   return (
     <div className={styles.container}>
-      <h1>
-        <Link href='/notes'> &larr; Back</Link> Note{' '}
+      <h1 className={`${styles.subPageTitle}`}>
+        <Link href='/notes' className={styles.backLink}>
+          {' '}
+          &larr; Back
+        </Link>
+        : Note{' '}
       </h1>
       <article className={styles.note}>
         <h3 className={styles.title}>{note.title}</h3>
