@@ -24,7 +24,7 @@ export default function AddNote({ onAddNote }: IOnAddNoteProps) {
     <>
       <div className={styles.divider} />
       <form action={onCreate} className={styles.form}>
-        <h3>Create a new Note</h3>
+        <h3 className={styles.title}>Create a new Note</h3>
 
         <div className={styles['form-control']}>
           <label className={styles.label} htmlFor='title'>
