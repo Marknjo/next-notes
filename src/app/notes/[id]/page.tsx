@@ -1,6 +1,7 @@
 import { INote } from '@/src/types/INote';
 import styles from '../Notes.module.css';
 import Link from 'next/link';
+import DeleteNote from '../DeleteNote';
 
 async function getNote(noteId: string) {
   const res = await fetch(
@@ -30,7 +31,10 @@ export default async function NotePage({ params }: { params: { id: string } }) {
       <article className={styles.note}>
         <h3 className={styles.title}>{note.title}</h3>
         <h5 className={styles.content}>{note.content}</h5>
-        <p className={styles.created}>{note.created}</p>
+        <footer className={styles.footer}>
+          <p className={styles.created}>{note.created}</p>
+          <DeleteNote id={note.id} />
+        </footer>
       </article>
     </div>
   );
