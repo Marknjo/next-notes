@@ -6,6 +6,7 @@ import AddNote from './AddNote';
 import { addNote } from './actions';
 import { revalidatePath } from 'next/cache';
 import DeleteNote from './DeleteNote';
+import { Note } from './Note';
 
 async function getNotes() {
   const res = await fetch(
@@ -51,7 +52,7 @@ export default async function NotesPage() {
       {hasNotes && (
         <div className={styles.grid}>
           {notes.map((note) => (
-            <Note key={note.id} {...note} />
+            <Note key={note.id} note={note} />
           ))}
         </div>
       )}
@@ -66,20 +67,5 @@ export default async function NotesPage() {
 
       <AddNote onAddNote={onCreateNote} />
     </div>
-  );
-}
-
-function Note({ content, title, id, created }: INote) {
-  return (
-    <Link href={`/notes/${id}`}>
-      <article className={styles.note}>
-        <h2 className={styles.title}>{title}</h2>
-        <h5 className={styles.content}>{content}</h5>
-        <footer className={styles.footer}>
-          <p className={styles.created}>{created}</p>
-          <DeleteNote id={id} />
-        </footer>
-      </article>
-    </Link>
   );
 }
