@@ -9,15 +9,15 @@ export function Note({
   note: INote;
 }) {
   return (
-    <Link href={`/notes/${id}`}>
-      <article className={styles.note}>
+    <article className={styles.note}>
+      <Link href={`/notes/${id}`}>
         <h2 className={styles.title}>{title}</h2>
         <h5 className={styles.content}>{content}</h5>
-        <footer className={styles.footer}>
-          <p className={styles.created}>{created}</p>
-          <DeleteNote id={id} />
-        </footer>
-      </article>
-    </Link>
+      </Link>
+      <footer className={styles.footer}>
+        <p className={styles.created}>{created}</p>
+        <DeleteNote id={id} />
+      </footer>
+    </article>
   );
 }

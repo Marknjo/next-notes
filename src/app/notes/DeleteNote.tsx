@@ -16,7 +16,7 @@ export default function DeleteNote({ id }: { id: string }) {
   return (
     <form action={action}>
       <button className={styles.deleteBtn} type='submit'>
-        🗑️ Delete
+        🗑️
       </button>
     </form>
   );
