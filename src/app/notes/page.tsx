@@ -5,6 +5,7 @@ import styles from './Notes.module.css';
 import AddNote from './AddNote';
 import { addNote } from './actions';
 import { revalidatePath } from 'next/cache';
+import DeleteNote from './DeleteNote';
 
 async function getNotes() {
   const res = await fetch(
@@ -74,7 +75,10 @@ function Note({ content, title, id, created }: INote) {
       <article className={styles.note}>
         <h2 className={styles.title}>{title}</h2>
         <h5 className={styles.content}>{content}</h5>
-        <p className={styles.created}>{created}</p>
+        <footer className={styles.footer}>
+          <p className={styles.created}>{created}</p>
+          <DeleteNote id={id} />
+        </footer>
       </article>
     </Link>
   );
