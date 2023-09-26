@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import styles from './AddNote.module.css';
 import { experimental_useFormStatus as useFormStatus } from 'react-dom';
 
@@ -12,18 +12,21 @@ interface IOnAddNoteProps {
 }
 
 export default function AddNote({ onAddNote }: IOnAddNoteProps) {
+  const formRef = useRef<HTMLFormElement>(null);
   const [message, setMessage] = useState('');
   const { pending } = useFormStatus();
 
   async function onCreate(formData: FormData) {
     const res = await onAddNote(formData);
     setMessage(res.message);
+
+    res?.message && formRef.current?.reset();
   }
 
   return (
     <>
       <div className={styles.divider} />
-      <form action={onCreate} className={styles.form}>
+      <form action={onCreate} className={styles.form} ref={formRef}>
         <h3 className={styles.title}>Create a new Note</h3>
 
         <div className={styles['form-control']}>
